@@ -1,8 +1,5 @@
-import { ReactNode } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import TabNavigation from '@/components/TabNavigation';
-import { useLocation } from 'wouter';
+import { ReactNode } from "react";
+import { useLocation } from "wouter";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -11,17 +8,11 @@ interface MainLayoutProps {
 const MainLayout = ({ children }: MainLayoutProps) => {
   const [location] = useLocation();
 
+  // 只用 main，沒有多餘元素
   return (
-    <div className="min-h-screen bg-neutral-100 flex flex-col">
-      <Header />
-      <TabNavigation currentPath={location} />
-      
-      <main className="container mx-auto px-4 py-8 flex-grow">
-        {children}
-      </main>
-      
-      <Footer />
-    </div>
+    <main className="min-h-screen flex flex-col items-center justify-start bg-[#f7f6f3] px-0 py-0">
+      {children}
+    </main>
   );
 };
 

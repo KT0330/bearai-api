@@ -12,6 +12,8 @@ import LearningMapPage from "@/pages/learning-map";
 import MiniGamesPage from "@/pages/mini-games";
 import ProgressPage from "@/pages/progress";
 import NotFound from "@/pages/not-found";
+import SocialTutorialPage from "@/pages/social-tutorial"; // 新增這行
+import AskPage from "@/pages/ask"; // 新增
 
 function Router() {
   return (
@@ -19,8 +21,11 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/characters" component={CharactersPage} />
       <Route path="/learning-map" component={LearningMapPage} />
+      <Route path="/learning-map/social" component={SocialTutorialPage} />{" "}
+      {/* 新增這行 */}
       <Route path="/mini-games" component={MiniGamesPage} />
       <Route path="/progress" component={ProgressPage} />
+      <Route path="/ask" component={AskPage} />
       <Route component={NotFound} />
     </Switch>
   );

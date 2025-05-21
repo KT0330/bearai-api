@@ -1,3 +1,5 @@
+import React from "react";
+
 // User related types
 export interface User {
   id: number;
@@ -17,7 +19,8 @@ export interface User {
 export interface Character {
   id: number;
   name: string;
-  image: string;
+  // image 改成 icon，使用 React.ReactNode 以支援 SVG React 元件
+  icon: React.ReactNode;
   description: string;
   tags: string[];
 }
@@ -33,14 +36,14 @@ export interface LearningZone {
     left?: string;
     right?: string;
   };
-  status: 'completed' | 'in-progress' | 'locked';
+  status: "completed" | "in-progress" | "locked";
   lessons: Lesson[];
 }
 
 export interface Lesson {
   id: number;
   title: string;
-  status: 'completed' | 'in-progress' | 'locked';
+  status: "completed" | "in-progress" | "locked";
   progress: number;
 }
 
@@ -49,7 +52,7 @@ export interface Game {
   name: string;
   description: string;
   image: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
   duration: string;
   points: number;
   locked: boolean;
@@ -64,7 +67,7 @@ export interface Achievement {
 
 export interface Activity {
   id: number;
-  type: 'lesson' | 'game' | 'achievement';
+  type: "lesson" | "game" | "achievement";
   title: string;
   time: string;
   points: number;

@@ -3,56 +3,314 @@
 @tailwind utilities;
 
 :root {
-      --background: 0 0% 100%;
---foreground: 20 14.3% 4.1%;
---muted: 60 4.8% 95.9%;
---muted-foreground: 25 5.3% 44.7%;
---popover: 0 0% 100%;
---popover-foreground: 20 14.3% 4.1%;
---card: 0 0% 100%;
---card-foreground: 20 14.3% 4.1%;
---border: 20 5.9% 90%;
---input: 20 5.9% 90%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 60 4.8% 95.9%;
---secondary-foreground: 24 9.8% 10%;
---accent: 60 4.8% 95.9%;
---accent-foreground: 24 9.8% 10%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 60 9.1% 97.8%;
---ring: 20 14.3% 4.1%;
---radius: 0.5rem;
-  }
-  .dark {
-      --background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 0 0% 98%;
---ring: 240 4.9% 83.9%;
---radius: 0.5rem;
+  --background: 44 100% 98%;
+  /* 米白 (#FFFDF8) */
+  --foreground: 222 14% 20%;
+  /* 柔和深灰 #373A3C */
+  --muted: 210 60% 96%;
+  /* 淺藍 #E8F6FB */
+  --muted-foreground: 230 12% 40%;
+  /* 淺灰藍 */
+  --popover: 44 100% 98%;
+  /* 米白 */
+  --popover-foreground: 222 14% 20%;
+  --card: 44 100% 98%;
+  --card-foreground: 222 14% 20%;
+  --border: 44 40% 93%;
+  --input: 44 40% 93%;
+  --primary: 340 90% 84%;
+  /* 馬卡龍粉 #FDA4B8 */
+  --primary-foreground: 340 90% 34%;
+  --secondary: 160 70% 84%;
+  /* 馬卡龍綠 #A3F9D6 */
+  --secondary-foreground: 162 68% 32%;
+  --accent: 51 98% 89%;
+  /* 馬卡龍黃 #FFF4B1 */
+  --accent-foreground: 40 70% 32%;
+  --info: 260 61% 88%;
+  /* 馬卡龍紫 #E6D6FA */
+  --success: 160 68% 84%;
+  /* 綠 */
+  --warning: 51 98% 89%;
+  /* 黃 */
+  --danger: 340 90% 94%;
+  /* 粉紅偏淺 */
+  --destructive: 0 84% 92%;
+  --destructive-foreground: 0 100% 40%;
+  --ring: 340 90% 84%;
+  --radius: 1.3rem;
+}
+
+.dark {
+  --background: 240 10% 10%;
+  --foreground: 0 0% 92%;
+  --muted: 220 14% 16%;
+  --muted-foreground: 240 8% 65%;
+  --popover: 240 10% 10%;
+  --popover-foreground: 0 0% 95%;
+  --card: 240 10% 10%;
+  --card-foreground: 0 0% 95%;
+  --border: 220 14% 18%;
+  --input: 220 14% 18%;
+  --primary: 340 88% 60%;
+  --primary-foreground: 340 97% 25%;
+  --secondary: 160 68% 30%;
+  --secondary-foreground: 162 68% 85%;
+  --accent: 51 98% 80%;
+  --accent-foreground: 40 70% 25%;
+  --ring: 340 88% 60%;
+  --radius: 1.3rem;
+}
+
+/* 全站鋪滿草地背景圖（重點就在這） */
+body {
+  margin: 0;
+  background-image: url('https://i.postimg.cc/nV9pHgSz/temp-Image4-EODHd.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: hsl(var(--background));
+  @apply antialiased;
+  color: hsl(var(--foreground));
+  font-size: 1.06rem;
+  border-radius: var(--radius);
+  letter-spacing: 0.01em;
+  font-family: 'Jua', 'Cute Font', 'Noto Sans TC', 'Quicksand', 'PingFang TC', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* 套用可愛字體於標題 */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Jua', 'Cute Font', 'Noto Sans TC', 'Quicksand', 'Comic Sans MS', cursive, sans-serif;
+  color: hsl(var(--foreground));
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* 主題圓角按鈕 */
+.btn-cute {
+  @apply rounded-full font-bold shadow-md transition-all;
+  padding: 0.7rem 2rem;
+  font-size: 1.09rem;
+  background-color: hsl(var(--primary));
+  color: #fff;
+  border: none;
+}
+
+.btn-cute:hover {
+  background-color: hsl(var(--primary) / 0.82);
+  transform: scale(1.05);
+  color: #fff;
+}
+
+/* 卡片樣式-馬卡龍色+圓角（純色無漸層） */
+.card-cute {
+  @apply rounded-3xl shadow-lg p-7;
+  background: #fffdfa;
+  border: 2px solid hsl(var(--accent));
+}
+
+/* 角色小熊圓背景裝飾 */
+.gummy-bg {
+  @apply rounded-full shadow-lg flex items-center justify-center;
+  background-color: hsl(var(--accent));
+  width: 132px;
+  height: 132px;
+  margin: 0 auto;
+}
+
+/* 馬卡龍色調字體/背景 */
+.text-macaron-pink {
+  color: #F87CA0;
+}
+
+.text-macaron-green {
+  color: #5FD2A6;
+}
+
+.text-macaron-yellow {
+  color: #FFF3A3;
+}
+
+.text-macaron-purple {
+  color: #BBAEFF;
+}
+
+.text-macaron-brown {
+  color: #8B5E3C;
+}
+
+.bg-macaron-pink {
+  background-color: #F87CA0;
+}
+
+.bg-macaron-green {
+  background-color: #87E0AE;
+}
+
+.bg-macaron-yellow {
+  background-color: #FFF3A3;
+}
+
+.bg-macaron-purple {
+  background-color: #BBAEFF;
+}
+
+.bg-macaron-pink\/20 {
+  background-color: #F87CA033;
+}
+
+/* 柔和灰、字體顏色 */
+.text-soft-black {
+  color: #373A3C;
+}
+
+.text-gray-secondary {
+  color: #7b7b7b;
+}
+
+.text-gray-muted {
+  color: #a2a2a2;
+}
+
+/* 標題柔和粉色 */
+.title-cute {
+  color: #F78EA0;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-family: 'Jua', 'Cute Font', 'Noto Sans TC', cursive, sans-serif;
+}
+
+/* 移除多餘邊框/陰影 */
+input,
+button,
+.card-cute,
+.btn-cute {
+  border-width: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+/* 可愛 navbar 樣式 */
+.navbar-cute {
+  background: hsl(var(--background));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 18px 0 #fbeff2b7;
+  border: none;
+}
+
+.nav-link-active {
+  color: #F87CA0 !important;
+  font-weight: bold;
+}
+
+/* 柔和 section 間距 */
+.section-cute {
+  @apply rounded-xl p-8 shadow-md mb-10;
+  background: hsl(var(--background));
+  border-radius: 1.2rem;
+}
+
+/* footer/資訊欄底色淡淡黃（可根據設計調整） */
+.footer-cute {
+  background: #fff9e5;
+  color: #ad9683;
+  font-family: 'Jua', 'Noto Sans TC', sans-serif;
+  font-size: 1.05rem;
+  border-radius: 1.3rem 1.3rem 0 0;
+}
+
+/* 可愛小熊裝飾區塊，可加在你想要的地方 */
+.bear-decoration {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.92;
+}
+
+::-webkit-scrollbar {
+  background: #fcf8f3;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbe6ef;
+  border-radius: 8px;
+}
+
+/* 針對小螢幕優化圓角 */
+@media (max-width: 700px) {
+
+  body,
+  .section-cute,
+  .footer-cute,
+  .navbar-cute,
+  .card-cute {
+    border-radius: 0.8rem !important;
   }
 
-@layer base {
-  * {
-    @apply border-border;
+  /* 小熊圓形底＋hover 動畫 */
+  .gummy-bear-cute {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: #fff6fb;
+    box-shadow: 0 4px 16px #fbeff255;
+    transition: transform 0.18s cubic-bezier(.4, 1.6, .7, 1);
   }
 
-  body {
-    @apply font-sans antialiased bg-background text-foreground;
+  .gummy-bear-cute:hover {
+    transform: scale(1.08) rotate(-3deg);
   }
+
+  /* 氣泡對話框 */
+  .bear-bubble {
+    background: #fffaf5;
+    border-radius: 18px;
+    padding: 8px 18px;
+    color: #A44A60;
+    margin-left: 4px;
+    font-weight: 600;
+    font-size: 1.02rem;
+    box-shadow: 0 2px 8px #ffe6ef55;
+    display: inline-block;
+    margin-top: 4px;
+    position: relative;
+  }
+
+  .bear-bubble::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 15px;
+    width: 15px;
+    height: 15px;
+    background: #fffaf5;
+    border-radius: 70% 30% 50% 50%;
+    transform: rotate(-28deg);
+    box-shadow: -2px 3px 8px #ffe6ef44;
+  }
+
+  /* 進場淡入動畫 */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.42s cubic-bezier(.35, 1.4, .7, 1) both;
+  }
+
 }
