@@ -37,5 +37,7 @@ def ask():
     answer = response.choices[0].message.content.strip()
     return jsonify({"answer": answer})
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    if __name__ == "__main__":
+        port = int(os.environ.get("PORT", 10000))  # 重點在這行
+        app.run(host="0.0.0.0", port=port)
+
