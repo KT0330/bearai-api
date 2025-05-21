@@ -14,6 +14,10 @@ CHARACTER_STYLE = {
 
 app = Flask(__name__)
 
+@app.route("/", methods=["GET"])
+def index():
+    return "Bear AI is running!"   # 這行讓 Render 健康檢查可以過
+
 @app.route("/ask", methods=["POST"])
 def ask():
     data = request.get_json()
