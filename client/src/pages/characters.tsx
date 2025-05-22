@@ -21,15 +21,17 @@ const CharactersPage = () => {
   return (
     <div className="min-h-[calc(100vh-160px)] flex flex-col items-center py-14 px-4 bg-[#fffdf8]">
       <h2
-        className="text-3xl md:text-4xl font-bold mb-7 text-macaron-pink"
+        className="font-bold mb-7 text-macaron-pink"
         style={{
+          fontSize: "30px", // 直接指定字體大小
           letterSpacing: "2px",
           fontFamily:
             "Quicksand, Noto Sans TC, Poppins, Comic Sans MS, cursive, sans-serif",
         }}
       >
-        選擇你的學習夥伴
+        每個夥伴都有不同的個性與回答風格喔！快來選一位陪你學習吧 🐻✨
       </h2>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl mb-12">
         {characters.map((c) => (
           <div
@@ -95,18 +97,18 @@ const CharactersPage = () => {
           <a>
             <Button
               variant="outline"
-              className="bg-neutral-200 hover:bg-neutral-300 text-neutral-700 font-bold py-2 px-8 rounded-full shadow transition-colors"
+              className="btn-cute bg-macaron-pink text-white py-2 px-10 rounded-full shadow transition-all font-bold"
               style={{
                 fontFamily:
                   "Quicksand, Noto Sans TC, Comic Sans MS, cursive, sans-serif",
                 fontWeight: 700,
               }}
             >
-              ← 返回首頁
+              回首頁
             </Button>
           </a>
         </Link>
-        <Link href="/learning-map">
+        <Link href="/ask">
           <a>
             <Button
               className="btn-cute bg-macaron-pink text-white py-2 px-10 rounded-full shadow transition-all font-bold"
@@ -116,7 +118,7 @@ const CharactersPage = () => {
                 fontWeight: 700,
               }}
             >
-              繼續
+              我要直接問！
             </Button>
           </a>
         </Link>

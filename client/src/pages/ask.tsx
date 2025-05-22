@@ -13,14 +13,33 @@ const AskPage = () => {
     return null;
   }
 
-  function handleAsk() {
+  async function handleAsk() {
     if (!question.trim()) return;
     setHistory([
       ...history,
       `你：${question}`,
-      `${selectedCharacter.name}：好問題，讓我想想...`,
+      `${selectedCharacter.name}：思考中...`,
     ]);
     setQuestion("");
+    try {
+      const res = await fetch("https://bearai-flask-api.onrender.com/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question, character: selectedCharacter.name }),
+      });
+      const data = await res.json();
+      setHistory((prev) =>
+        prev.slice(0, -1).concat(`${selectedCharacter.name}：${data.answer}`),
+      );
+    } catch (err) {
+      setHistory((prev) =>
+        prev
+          .slice(0, -1)
+          .concat(
+            `${selectedCharacter.name}：很抱歉，伺服器暫時無法回答問題...`,
+          ),
+      );
+    }
   }
 
   return (
@@ -32,8 +51,160 @@ const AskPage = () => {
         flexDirection: "column",
         alignItems: "center",
         padding: 0,
+        position: "relative", // <-- 裝飾用到
       }}
     >
+      {/* ====== 左右均勻分散的熊掌裝飾 ====== */}
+      <div
+        style={{
+          position: "fixed",
+          zIndex: 0,
+          inset: 0,
+          width: "100vw",
+          height: "100vh",
+          pointerEvents: "none",
+          overflow: "hidden",
+          userSelect: "none",
+          background: "none",
+        }}
+      >
+        {/* 左側 5 隻 */}
+        <span
+          style={{
+            position: "absolute",
+            top: "20vh",
+            left: "3vw",
+            fontSize: 62,
+            opacity: 0.16,
+            color: "#888999",
+            transform: "rotate(-11deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "13vh",
+            left: "24vw",
+            fontSize: 59,
+            opacity: 0.15,
+            color: "#888999",
+            transform: "rotate(13deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "41vh",
+            left: "17vw",
+            fontSize: 60,
+            opacity: 0.15,
+            color: "#888999",
+            transform: "rotate(-7deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "75vh",
+            left: "32vw",
+            fontSize: 60,
+            opacity: 0.16,
+            color: "#888999",
+            transform: "rotate(7deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "62vh",
+            left: "7vw",
+            fontSize: 66,
+            opacity: 0.17,
+            color: "#888999",
+            transform: "rotate(-17deg)",
+          }}
+        >
+          🐾
+        </span>
+
+        {/* 右側 5 隻 */}
+        <span
+          style={{
+            position: "absolute",
+            top: "8vh",
+            left: "70vw",
+            fontSize: 66,
+            opacity: 0.17,
+            color: "#888999",
+            transform: "rotate(14deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "26vh",
+            left: "87vw",
+            fontSize: 55,
+            opacity: 0.17,
+            color: "#888999",
+            transform: "rotate(-11deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "44vh",
+            left: "77vw",
+            fontSize: 60,
+            opacity: 0.14,
+            color: "#888999",
+            transform: "rotate(10deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "61vh",
+            left: "91vw",
+            fontSize: 56,
+            opacity: 0.15,
+            color: "#888999",
+            transform: "rotate(-9deg)",
+          }}
+        >
+          🐾
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            top: "76vh",
+            left: "73vw",
+            fontSize: 64,
+            opacity: 0.17,
+            color: "#888999",
+            transform: "rotate(16deg)",
+          }}
+        >
+          🐾
+        </span>
+      </div>
+      {/* ====== 熊掌裝飾結束 ====== */}
+
+      {/* 下面這邊都是你原本的內容，一個字都沒動 */}
       <div
         style={{
           width: "100%",
@@ -66,7 +237,7 @@ const AskPage = () => {
         >
           {selectedCharacter.name}
         </div>
-        {/* 聊天歷史，這裡加大高度 */}
+        {/* 聊天歷史 */}
         <div
           style={{
             width: "100%",
@@ -138,18 +309,17 @@ const AskPage = () => {
           </button>
         </div>
       </div>
-
       {/* 下方導覽按鈕區 */}
       <div
         className="w-full flex justify-between items-center px-6 py-5"
         style={{
-          position: "fixed", // 讓他固定吸在畫面底部
+          position: "fixed",
           bottom: 0,
           left: 0,
           zIndex: 20,
-          background: "transparent", //透明
+          background: "transparent",
           boxShadow: "none",
-          width: "100vw", // 貼齊
+          width: "100vw",
         }}
       >
         <Link href="/learning-map">
@@ -158,7 +328,7 @@ const AskPage = () => {
               className="btn-cute"
               style={{
                 fontWeight: 600,
-                backgroundColor: "#B7E1F7", // 跟角色選擇同色
+                backgroundColor: "#B7E1F7",
                 color: "#35688e",
                 fontSize: 18,
                 padding: "10px 32px",
@@ -175,7 +345,7 @@ const AskPage = () => {
               className="btn-cute"
               style={{
                 fontWeight: 600,
-                backgroundColor: "#FFF4B1", // 淡黃色
+                backgroundColor: "#FFF4B1",
                 color: "#9d8500",
                 fontSize: 18,
                 padding: "10px 32px",
