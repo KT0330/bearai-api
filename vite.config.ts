@@ -27,7 +27,7 @@ export default defineConfig({
   root: path.resolve(import.meta.dirname, "client"),
   publicDir: path.resolve(import.meta.dirname, "client/public"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/client"),
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
     rollupOptions: {
       plugins: [
@@ -35,13 +35,10 @@ export default defineConfig({
           name: "copy-redirects",
           closeBundle() {
             const src = path.resolve(import.meta.dirname, "client/_redirects");
-            const dest = path.resolve(
-              import.meta.dirname,
-              "dist/client/_redirects",
-            );
+            const dest = path.resolve(import.meta.dirname, "dist/_redirects");
             if (fs.existsSync(src)) {
               fs.copyFileSync(src, dest);
-              console.log("✅ _redirects copied to dist/client/");
+              console.log("✅ _redirects copied to dist/");
             } else {
               console.warn("⚠️ _redirects file not found in client/");
             }
