@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import fs from "fs";
 
 export default defineConfig({
   plugins: [
@@ -28,5 +29,25 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/client"),
     emptyOutDir: true,
+    rollupOptions: {
+      plugins: [
+        {
+          name: "copy-redirects",
+          closeBundle() {
+            const src = path.resolve(import.meta.dirname, "client/_redirects");
+            const dest = path.resolve(
+              import.meta.dirname,
+              "dist/client/_redirects",
+            );
+            if (fs.existsSync(src)) {
+              fs.copyFileSync(src, dest);
+              console.log("✅ _redirects copied to dist/client/");
+            } else {
+              console.warn("⚠️ _redirects file not found in client/");
+            }
+          },
+        },
+      ],
+    },
   },
 });
